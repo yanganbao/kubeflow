@@ -1,2 +1,2 @@
-FROM gcr.io/arrikto/kubeflow/oidc-authservice:28c59ef
+FROM gcr.io/ml-pipeline/cache-deployer:1.8.2
 MAINTAINER yab

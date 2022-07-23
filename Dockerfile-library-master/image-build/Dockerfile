@@ -1,2 +1,2 @@
-FROM gcr.io/ml-pipeline/cache-server:1.8.2
+FROM gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0
 MAINTAINER yab

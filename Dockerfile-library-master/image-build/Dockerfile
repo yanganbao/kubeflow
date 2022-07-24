@@ -1,2 +1,2 @@
-FROM gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0
+FROM gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:fed92af8b9779c97482906db8857f27b5d4826708b75d0298aa30fad890067
 MAINTAINER yab

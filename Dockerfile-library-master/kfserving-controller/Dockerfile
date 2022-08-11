@@ -1,2 +1,2 @@
-FROM gcr.io/kfserving/kfserving-controller:0.2.2
-MAINTAINER zz<zhongzheng0813@163.com>
+FROM gcr.io/kfserving/kfserving-controller:v0.3.0
+MAINTAINER yab

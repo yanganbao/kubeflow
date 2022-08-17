@@ -1,2 +1,2 @@
-FROM gcr.io/ml-pipeline/workflow-controller:v3.2.3-license-compliance
+FROM gcr.io/ml-pipeline/argoexec:v3.2.3-license-compliance
 MAINTAINER yab

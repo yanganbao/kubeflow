@@ -1,2 +1,2 @@
-FROM gcr.io/ml-pipeline/argoexec:v3.2.3-license-compliance
+FROM gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
 MAINTAINER yab

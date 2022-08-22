@@ -1,2 +1,2 @@
-FROM gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+FROM gcr.io/arrikto/istio/pilot:1.14.1-1-g19df463bb
 MAINTAINER yab

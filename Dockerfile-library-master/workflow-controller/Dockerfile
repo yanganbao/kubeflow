@@ -1,2 +1,2 @@
-FROM gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:9084ea8498eae3c6c4364a397d66516a25e48488f4a9871ef765fa554ba483f0
+FROM gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:02f187b21cc00bc91c45db85571299f338fcbd58aa5c9193f0833782a7710dea
 MAINTAINER yab

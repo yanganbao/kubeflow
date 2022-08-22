@@ -1,2 +1,2 @@
-FROM gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:02f187b21cc00bc91c45db85571299f338fcbd58aa5c9193f0833782a7710dea
+FROM gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:14415b204ea8d0567235143a6c3377f49cbd35f18dc84dfa4baa7695c2a9b53d
 MAINTAINER yab

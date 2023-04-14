@@ -24,10 +24,10 @@ var Config struct {
 const (
 	// PyTorchInitContainerImageDefault is the default image for the pytorch
 	// init container.
-	PyTorchInitContainerImageDefault = "os-harbor-svc.default.svc.cloudos:443/helm/h3caios/alpine:3.10"
+	PyTorchInitContainerImageDefault = "matrix-registry.h3c.com:8088/matrix/h3caios/alpine:3.10"
 	// PyTorchInitContainerTemplateFileDefault is the default template file for
 	// the pytorch init container.
 	PyTorchInitContainerTemplateFileDefault = "/etc/config/initContainer.yaml"
 	// MPIKubectlDeliveryImageDefault is the default image for launcher pod in MPIJob init container.
-	MPIKubectlDeliveryImageDefault = "os-harbor-svc.default.svc.cloudos:443/helm/h3caios/mpioperator-kubectl-delivery:latest"
+	MPIKubectlDeliveryImageDefault = "matrix-registry.h3c.com:8088/matrix/h3caios/mpioperator-kubectl-delivery:latest"
 )

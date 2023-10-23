@@ -37,12 +37,6 @@ var (
 - name: init-pytorch
   image: {{.InitContainerImage}}
   imagePullPolicy: IfNotPresent
-  securityContext:
-    capabilities:
-      add:
-	  - NET_ADMIN
-	  drop:
-	  - KILL
   resources:
     limits:
       cpu: 100m

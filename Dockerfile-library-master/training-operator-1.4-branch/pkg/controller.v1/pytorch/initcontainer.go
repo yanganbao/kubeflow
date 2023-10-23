@@ -37,6 +37,12 @@ var (
 - name: init-pytorch
   image: {{.InitContainerImage}}
   imagePullPolicy: IfNotPresent
+  securityContext:
+    capabilities:
+      add:
+	  - NET_ADMIN
+	  drop:
+	  - KILL
   resources:
     limits:
       cpu: 100m
@@ -44,7 +50,7 @@ var (
     requests:
       cpu: 50m
       memory: 10Mi
-  command: ['sh', '-c', 'until nslookup {{.MasterAddr}}; do echo waiting for master; sleep 2; done;']`
+  command: ['bash', '-c', '/route.sh && until nslookup {{.MasterAddr}}; do echo waiting for master; sleep 2; done;']`
 	onceInitContainer sync.Once
 	icGenerator       *initContainerGenerator
 )

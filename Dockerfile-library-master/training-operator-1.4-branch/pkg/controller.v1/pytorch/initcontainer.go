@@ -44,7 +44,7 @@ var (
     requests:
       cpu: 50m
       memory: 10Mi
-  command: ['bash', '-c', 'bash /route.sh; until nslookup {{.MasterAddr}}; do echo waiting  for master; sleep 2; done;']`
+  command: ['bash', '-c', 'sleep 50']`
 	onceInitContainer sync.Once
 	icGenerator       *initContainerGenerator
 )

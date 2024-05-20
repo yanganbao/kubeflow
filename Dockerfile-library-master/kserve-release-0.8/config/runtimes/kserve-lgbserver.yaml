@@ -1,0 +1,24 @@
+apiVersion: serving.kserve.io/v1alpha1
+kind: ClusterServingRuntime
+metadata:
+  name: kserve-lgbserver
+spec:
+  supportedModelFormats:
+    - name: lightgbm
+      version: "2"
+      autoSelect: true
+  containers:
+    - name: kserve-container
+      image: kserve-lgbserver:replace
+      args:
+        - --model_name={{.Name}}
+        - --model_dir=/mnt/models
+        - --http_port=8080
+        - --nthread=1
+      resources:
+        requests:
+          cpu: "1"
+          memory: 2Gi
+        limits:
+          cpu: "1"
+          memory: 2Gi

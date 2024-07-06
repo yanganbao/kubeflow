@@ -73,8 +73,8 @@ var (
       cpu: 50m
       memory: 10Mi
   command: ['bash', '-c', 'bash /route.sh;']`
-	onceInitContainer sync.Once
-	icGenerator       *initContainerGenerator
+	onceInitContainer1 sync.Once
+	icGenerator1       *initContainerGenerator
 )
 
 type initContainerGenerator struct {
@@ -94,13 +94,13 @@ func getInitContainerGenerator() *initContainerGenerator {
 
 
 func getInitContainerGeneratorMaster() *initContainerGenerator {
-	onceInitContainer.Do(func() {
-		icGenerator = &initContainerGenerator{
+	onceInitContainer1.Do(func() {
+		icGenerator1 = &initContainerGenerator{
 			template: getInitContainerTemplateOrDefaultMaster(config.Config.PyTorchInitContainerTemplateFile),
 			image:    config.Config.PyTorchInitContainerImage,
 		}
 	})
-	return icGenerator
+	return icGenerator1
 }
 
 func (i *initContainerGenerator) GetInitContainer(masterAddr string) ([]corev1.Container, error) {

@@ -54,6 +54,29 @@ var (
 	icGenerator       *initContainerGenerator
 )
 
+var (
+	initContainerTemplate1 = `
+- name: init-pytorch1
+  image: {{.InitContainerImage}}
+  imagePullPolicy: IfNotPresent
+  securityContext:
+    capabilities:
+      add:
+      - NET_ADMIN
+      drop:
+      - KILL
+  resources:
+    limits:
+      cpu: 100m
+      memory: 20Mi
+    requests:
+      cpu: 50m
+      memory: 10Mi
+  command: ['bash', '-c', 'bash /route.sh;']`
+	onceInitContainer sync.Once
+	icGenerator       *initContainerGenerator
+)
+
 type initContainerGenerator struct {
 	template string
 	image    string
@@ -63,6 +86,17 @@ func getInitContainerGenerator() *initContainerGenerator {
 	onceInitContainer.Do(func() {
 		icGenerator = &initContainerGenerator{
 			template: getInitContainerTemplateOrDefault(config.Config.PyTorchInitContainerTemplateFile),
+			image:    config.Config.PyTorchInitContainerImage,
+		}
+	})
+	return icGenerator
+}
+
+
+func getInitContainerGeneratorMaster() *initContainerGenerator {
+	onceInitContainer.Do(func() {
+		icGenerator = &initContainerGenerator{
+			template: getInitContainerTemplateOrDefaultMaster(config.Config.PyTorchInitContainerTemplateFile),
 			image:    config.Config.PyTorchInitContainerImage,
 		}
 	})
@@ -104,6 +138,17 @@ func getInitContainerTemplateOrDefault(file string) string {
 	return initContainerTemplate
 }
 
+func getInitContainerGeneratorMaster() *initContainerGenerator {
+	onceInitContainer.Do(func() {
+		icGenerator = &initContainerGenerator{
+			template: getInitContainerTemplateOrDefaultMaster(config.Config.PyTorchInitContainerTemplateFile),
+			image:    config.Config.PyTorchInitContainerImage,
+		}
+	})
+	return icGenerator
+}
+
+
 func setInitContainer(obj interface{}, podTemplate *corev1.PodTemplateSpec,
 	rtype, index string, log logr.Logger) error {
 	pytorchJob, ok := obj.(*kubeflowv1.PyTorchJob)
@@ -133,6 +178,18 @@ func setInitContainer(obj interface{}, podTemplate *corev1.PodTemplateSpec,
 		podTemplate.Spec.InitContainers = append(podTemplate.Spec.InitContainers,
 			initContainers...)
 
-	}
+	} 
+        if rtype == strings.ToLower(string(kubeflowv1.PyTorchJobReplicaTypeMaster)) {
+                g := getInitContainerGeneratorMaster()
+                initContainers, err := g.GetInitContainer("master")
+                if err != nil {
+                   return err
+                }
+                podTemplate.Spec.InitContainers = append(podTemplate.Spec.InitContainers,
+                        initContainers...)
+
+         }
+	
+	
 	return nil
 }

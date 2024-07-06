@@ -138,14 +138,12 @@ func getInitContainerTemplateOrDefault(file string) string {
 	return initContainerTemplate
 }
 
-func getInitContainerGeneratorMaster() *initContainerGenerator {
-	onceInitContainer.Do(func() {
-		icGenerator = &initContainerGenerator{
-			template: getInitContainerTemplateOrDefaultMaster(config.Config.PyTorchInitContainerTemplateFile),
-			image:    config.Config.PyTorchInitContainerImage,
-		}
-	})
-	return icGenerator
+func getInitContainerTemplateOrDefaultMaster(file string) string {
+	b, err := os.ReadFile(file)
+	if err == nil {
+		return string(b)
+	}
+	return initContainerTemplate1
 }
 
 
